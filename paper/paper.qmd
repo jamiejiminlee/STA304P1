@@ -33,46 +33,48 @@ geographic divisions of the City of Toronto.
 # Data {#sec-data}
 
 The dataset used for this paper is "Police Annual Statistical Report" (@propertycrime_data), accessed through the Open Data Toronto portal (@opendatatoronto). The dataset was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). Despite the existence of other datasets in OpenDataToronto such as "Police Annual Statistical Report - Victims of Crimes", it wasn't chosen for this analysis as the paper focuses solely on property crimes. 
+```{r}
+#### Clean data ####
+raw_data <- read.csv("../data/raw_data/raw_data.csv")
+
+cleaned_data <-
+  raw_data |>
+  janitor::clean_names() |>
+  filter(category == "Crimes Against Property") |>
+  select(report_year, division, category, subtype, count) |>
+  mutate(
+    count_ = as.numeric(count)) |>
+  tidyr::drop_na()
+cleaned_data
+```
+
+
+```{r}
+yearly_propertycrime <- cleaned_data %>%
+  group_by(report_year) %>%
+  summarize(total_count = sum(count_))
+
+yearly_propertycrime
+``` 
+
 
 ```{r}
 #| label: codechunk1
 #| fig-cap: "Figure1: Graph compares the number of property crimes from 2013 to 2024, in 1-year increments. Figure displays a sudden spike in property crimes in 2023 - we will be analyzing the data from 2023 to compare different types of property crimes that occured"
 #| echo: false
 
-cleaned_data |>
+yearly_propertycrime %>%
   dplyr::filter(report_year >= 2013 & report_year <= 2024) |>
-  ggplot(mapping = aes(x = report_year, y = count)) +
+  ggplot(mapping = aes(x = report_year, y = total_count)) +
   geom_bar(stat = "identity", fill = "purple") +
   scale_x_continuous(breaks = seq(2013, 2024, by = 1)) +
   labs(
     x = "Year",
     y = "Reported Property Crimes"
-  ) 
-
+  ) +
+  theme_minimal()
 ```
 
-Talk more about it.
-
-And also planes (@fig-planes). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
-
-```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
-#| echo: false
-#| warning: false
-#| message: false
-
-analysis_data <- read_csv(here::here("data/analysis_data/analysis_data.csv"))
-
-analysis_data |> 
-  ggplot(aes(x = width, y = length)) +
-  geom_point(alpha = 0.8) +
-  theme_minimal() +
-  labs(x = "Wing width (mm)",
-       y = "Wing length (mm)")
-```
-
-Talk way more about it. 
 
 
 
@@ -80,22 +82,11 @@ Talk way more about it.
 
 The goal of our modelling strategy is twofold. Firstly,...
 
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details].
+Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix ].
 
 ## Model set-up
 
-Define $y_i$ as the number of seconds that the plane remained aloft. Then $\beta_i$ is the wing width and $\gamma_i$ is the wing length, both measured in millimeters.  
 
-\begin{align} 
-y_i|\mu_i, \sigma &\sim \mbox{Normal}(\mu_i, \sigma) \\
-\mu_i &= \alpha + \beta_i + \gamma_i\\
-\alpha &\sim \mbox{Normal}(0, 2.5) \\
-\beta &\sim \mbox{Normal}(0, 2.5) \\
-\gamma &\sim \mbox{Normal}(0, 2.5) \\
-\sigma &\sim \mbox{Exponential}(1)
-\end{align}
-
-We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
 
 
 ### Model justification
@@ -107,7 +98,7 @@ We can use maths by including latex between dollar signs, for instance $\theta$.
 
 # Results
 
-Our results are summarized in @tbl-modelresults.
+Our results are summarized in .
 
 ```{r}
 #| echo: false
@@ -115,27 +106,9 @@ Our results are summarized in @tbl-modelresults.
 #| warning: false
 #| message: false
 
-library(rstanarm)
-
-first_model <-
-  readRDS(file = here::here("models/first_model.rds"))
 ```
 
-```{r}
-#| echo: false
-#| eval: true
-#| label: tbl-modelresults
-#| tbl-cap: "Explanatory models of flight time based on wing width and wing length"
-#| warning: false
 
-modelsummary::modelsummary(
-  list(
-    "First model" = first_model
-  ),
-  statistic = "mad",
-  fmt = 2
-)
-```
 
 
 
@@ -167,10 +140,6 @@ Weaknesses and next steps should also be included.
 
 ## Posterior predictive check
 
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
-
 ```{r}
 #| eval: true
 #| echo: false
@@ -181,22 +150,10 @@ In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. Th
 #| fig-cap: "Examining how the model fits, and is affected by, the data"
 #| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
 
-pp_check(first_model) +
-  theme_classic() +
-  theme(legend.position = "bottom")
-
-posterior_vs_prior(first_model) +
-  theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
-  theme(legend.position = "bottom") +
-  coord_flip()
 ```
 
 ## Diagnostics
 
-@fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
 
 ```{r}
 #| echo: false
@@ -208,9 +165,6 @@ posterior_vs_prior(first_model) +
 #| fig-subcap: ["Trace plot", "Rhat plot"]
 #| layout-ncol: 2
 
-plot(first_model, "trace")
-
-plot(first_model, "rhat")
 ```
 
 
