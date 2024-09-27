@@ -199,6 +199,83 @@ If citing the R package (as software), it's generally good practice to include "
 If citing a dataset or another type of content accessed via the package, you can focus on the data and omit "R package."
 
 
+#| label: codechunk1
+#| fig-cap: Figure1
+#| echo: false
+
+cleaned_data |>
+  ggplot(mapping = aes(x = report_year, y = count) +
+  geom_bar(stat = "identity", fill = "purple")
+  labs(
+    x = "Year"
+    y = "Reported Property Crimes"
+  ) 
+
+for this code, it's giving
+
+Error: unexpected symbol in:
+"  geom_bar(stat = "identity", fill = "purple")
+  labs"
+ChatGPT said:
+ChatGPT
+The issue in your code is due to missing parentheses and commas. Specifically:
+
+You didn't close the parentheses for ggplot().
+The labs() function should have a comma between the x and y arguments.
+The pipe operator |> is good, but the ggplot() statement needs better closure of parentheses for each function.
+Here’s the corrected version of your code:
+
+r
+Copy code
+#| label: codechunk1
+#| fig-cap: Figure1
+#| echo: false
+
+cleaned_data |>
+  ggplot(mapping = aes(x = report_year, y = count)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  labs(
+    x = "Year",
+    y = "Reported Property Crimes"
+  )
+Changes made:
+
+Closed the ggplot() parentheses correctly.
+Added the missing comma between the x and y labels in the labs() function.
+This should resolve the error and generate the plot with the specified labels and colors. Let me know if it works!
+
+You said:
+how do i adjust the graph to show label for each year, divide into 10 bars through 2013-2024
+ChatGPT said:
+ChatGPT
+To display labels for each year on the x-axis and limit the number of bars to 10, representing the range from 2013 to 2024, you can:
+
+Adjust the x-axis to display every year by using scale_x_continuous() with breaks.
+Filter your data to only include the years 2013 to 2024.
+Here’s how to adjust your code:
+
+r
+Copy code
+#| label: codechunk1
+#| fig-cap: Figure1
+#| echo: false
+
+# Assuming cleaned_data contains a 'report_year' column ranging from 2013 to 2024
+cleaned_data |>
+  dplyr::filter(report_year >= 2013 & report_year <= 2024) |>
+  ggplot(mapping = aes(x = report_year, y = count)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  scale_x_continuous(breaks = seq(2013, 2024, by = 1)) +  # Show labels for each year
+  labs(
+    x = "Year",
+    y = "Reported Property Crimes"
+  )
+Key changes:
+Filtering the data: dplyr::filter(report_year >= 2013 & report_year <= 2024) ensures that only the years between 2013 and 2024 are plotted.
+Axis adjustments: scale_x_continuous(breaks = seq(2013, 2024, by = 1)) forces the x-axis to display every year label.
+If your data doesn't contain these exact years (2013 to 2024), or you have fewer than 10 years, adjust the filtering or the axis accordingly.
+
+
 
 
 
