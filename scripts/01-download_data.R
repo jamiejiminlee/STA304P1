@@ -1,11 +1,11 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Downloads and saves the Police Annual Statistical Report - Reported Crimes dataset from OpenDataToronto
+# Author: Jimin Lee 
+# Date: 27 September 2024
+# Contact: jamiejimin.lee@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: N/A
+# Any other information needed? N/A
 
 
 
@@ -19,7 +19,7 @@ library(dplyr)
 package <- show_package("police-annual-statistical-report-reported-crimes")
 package
 
-# get all resources for this package
+# get resources for this package
 resources <- list_package_resources("police-annual-statistical-report-reported-crimes")
 
 # identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
@@ -30,6 +30,5 @@ raw_data <- filter(datastore_resources, row_number()==1) %>% get_resource()
 raw_data
 
 
-
 #### Save data ####
-write_csv(raw_data, "data/raw_data/raw_data.csv")
+write_csv(raw_data, "data/raw_data/raw_propertycrime_data.csv")
