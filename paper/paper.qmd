@@ -26,7 +26,7 @@ library(readr)
 
 # Introduction
 
-In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city.@Statista2023 This paper explores and compares the rates of property crime across different
+In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper explores and compares the rates of property crime across different
 geographic divisions of the City of Toronto. 
 
 
