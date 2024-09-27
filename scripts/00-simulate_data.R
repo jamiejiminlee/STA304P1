@@ -22,7 +22,7 @@ geo_division <- c("D11", "D12", "D13", "D14", "D22", "D23", "D31", "D32", "D33",
 propertycrime_type <- c("Theft", "Break and Enter", "Fraud", "Assault", 
                         "Trespassing", "Arson", "Other")
 
-# Simulate data using tibble and crossing
+# Simulate data using tibble
 simulated_data <- 
   tibble(
     year = 2014:2023,
