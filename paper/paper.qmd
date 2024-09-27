@@ -45,7 +45,7 @@ cleaned_data <-
   mutate(
     count_ = as.numeric(count)) |>
   tidyr::drop_na()
-cleaned_data
+head(cleaned_data)
 ```
 
 
