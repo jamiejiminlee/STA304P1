@@ -1,13 +1,11 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Toronto Property Crime Analysis: Changes in Rates and Types of Property Crimes (2014-2023)" 
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
-date: today
+  - Jimin Lee
+thanks: "Code and data are available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git"
+date: 27 September 2024
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper aims to explore Toronto's property crime rates and types of property crimes from 2014 to 2023. The analysis reveals a spike in property crimes in 2023, with shifts towards crime types such as break-and-enter and auto thefts."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -19,34 +17,38 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
-library(palmerpenguins)
+library(opendatatoronto)
+library(knitr)
+library(dplyr)
+library(readr)
 ```
 
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
-
-The remainder of this paper is structured as follows. @sec-data....
-
+In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city.@Statista2023 This paper explores and compares the rates of property crime across different
+geographic divisions of the City of Toronto. 
 
 
 # Data {#sec-data}
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+The dataset used for this paper is "Police Annual Statistical Report" (@propertycrime_data), accessed through the Open Data Toronto portal (@opendatatoronto). The dataset was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). Despite the existence of other datasets in OpenDataToronto such as "Police Annual Statistical Report - Victims of Crimes", it wasn't chosen for this analysis as the paper focuses solely on property crimes. 
 
 ```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
+#| label: codechunk1
+#| fig-cap: "Figure1: Graph compares the number of property crimes from 2013 to 2024, in 1-year increments. Figure displays a sudden spike in property crimes in 2023 - we will be analyzing the data from 2023 to compare different types of property crimes that occured"
 #| echo: false
 
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
+cleaned_data |>
+  dplyr::filter(report_year >= 2013 & report_year <= 2024) |>
+  ggplot(mapping = aes(x = report_year, y = count)) +
+  geom_bar(stat = "identity", fill = "purple") +
+  scale_x_continuous(breaks = seq(2013, 2024, by = 1)) +
+  labs(
+    x = "Year",
+    y = "Reported Property Crimes"
+  ) 
+
 ```
 
 Talk more about it.
