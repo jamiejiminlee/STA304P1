@@ -5,7 +5,7 @@ author:
 thanks: "Code and data are available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git"
 date: 27 September 2024
 date-format: long
-abstract: "This paper aims to explore Toronto's property crime rates and types of property crimes from 2014 to 2023. The analysis reveals a spike in property crimes in 2023, with shifts towards crime types such as break-and-enter and auto thefts."
+abstract: "This paper aims to explore Toronto's property crime rates and types of property crimes from 2014 to 2023.  The analysis reveals a spike in property crimes in 2023, with shifts towards crime types such as break-and-enter and auto thefts."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -27,6 +27,7 @@ library(readr)
 # Introduction
 
 Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' perceptions on safety and security, influencing both the social and economic well-being of communities. 
+
 In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper performs a trend analysis on property crime trends from 2014 to 2023, focusing on the sharp rise in 2023. The study begins by examining annual crime rates across the 10-year range, followed by an analysis of the distribution of property crime categories in 2023 to explore the factors behind the sudden spike. This paper provides insights into geographic and crime-type patterns influencing the increase in property-related offences. 
 
 # Data {#sec-data}
@@ -38,7 +39,10 @@ This dataset was chosen for its structured format, which allows for easy data cl
 ```{r}
 #| include: false
 #| warning: false
+#| error: false
 #| message: false
+
+cleaned_data <- read_csv("/Users/jamielee/Toronto-Reported-Crimes/data/analysis_data/analysis_data.csv")
 
 yearly_propertycrime <- cleaned_data %>%
   group_by(report_year) %>%
@@ -51,6 +55,8 @@ propertycrime_type2023 <- cleaned_data %>%
   group_by(subtype) %>%
   summarize(total_count = sum(count_)) %>%
   arrange(desc(total_count))
+
+propertycrime_type2023
 ``` 
 
 The following graph displays the trend in the number of property crimes from 2014 to 2023, revealing a sudden spike in 2023, with the reported number of property crimes exceeding 100,000.

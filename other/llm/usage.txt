@@ -277,5 +277,53 @@ If your data doesn't contain these exact years (2013 to 2024), or you have fewer
 
 
 
+how do i sort bars from highest number to lowest in total counts
+
+in ggplot code with my code: 
+
+{r}
+#| label: figure2
+#| fig-cap: "Graph compares the the types of property crimes reported in 2023."
+#| echo: false
+
+propertycrime_type2023 %>%
+  ggplot(mapping = aes(x = total_count, y = subtype)) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  labs(
+    x = "Types of Property Crimes",
+    y = "Number of Reported Crimes"
+  ) +
+  theme_minimal()
+
+3/3
+
+ChatGPT said:
+ChatGPT
+To sort the bars in your ggplot from highest to lowest based on total_count, you need to reorder the subtype factor by the total_count before plotting. You can use the fct_reorder() function from the forcats package to achieve this.
+
+Here is the updated ggplot code:
+
+r
+Copy code
+#| label: figure2
+#| fig-cap: "Graph compares the types of property crimes reported in 2023."
+#| echo: false
+
+propertycrime_type2023 %>%
+  ggplot(mapping = aes(x = total_count, y = forcats::fct_reorder(subtype, total_count))) +
+  geom_bar(stat = "identity", fill = "lightblue") +
+  labs(
+    x = "Types of Property Crimes",
+    y = "Number of Reported Crimes"
+  ) +
+  theme_minimal()
+This will ensure that the subtype values are reordered in descending order based on total_count. If you need to reverse the order, you can add the desc() function inside fct_reorder():
+
+r
+Copy code
+forcats::fct_reorder(subtype, total_count, .desc = TRUE)
+Let me know if this helps!
+
+
 
 
