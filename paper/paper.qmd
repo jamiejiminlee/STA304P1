@@ -26,7 +26,7 @@ library(readr)
 
 # Introduction
 
-Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' perceptions on safety and security, influencing both the social and economic well-being of communities. 
+Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' views on safety and security, influencing both the social and economic stability of their communities. (@unodc)
 
 In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper performs a trend analysis on property crime trends from 2014 to 2023, focusing on the sharp rise in 2023. The study begins by examining annual crime rates across the 10-year range, followed by an analysis of the distribution of property crime categories in 2023 to explore the factors behind the sudden spike. This paper provides insights into geographic and crime-type patterns influencing the increase in property-related offences. 
 
@@ -59,7 +59,7 @@ propertycrime_type2023 <- cleaned_data %>%
 propertycrime_type2023
 ``` 
 
-The following graph displays the trend in the number of property crimes from 2014 to 2023, revealing a sudden spike in 2023, with the reported number of property crimes exceeding 100,000.
+The following graph displays the trend in the number of property crimes from 2014 to 2023, revealing a sudden spike in 2023, with the reported number of property crimes exceeding 100,000. The variables used are "report_year" for the x-axis and "total_count" for the y-axis.
 
 ```{r}
 #| label: figure1
@@ -78,7 +78,9 @@ yearly_propertycrime %>%
   theme_minimal()
 ```
 
-Due to the evident spike of property crimes in 2023 from Figure 1, we now investigate the types of property crimes that occured in 2023, to determine if the breakdown of different offence categories would provide insight into the reasoning behind the sudden spike. By analyzing the distribution of various subtypes under the "Crime Against Property" category, such as "Auto Theft" and "Break & Enter". 
+Due to the evident spike of property crimes in 2023 from Figure 1, we now investigate the types of property crimes that occured in 2023, to determine if the breakdown of different offence categories would provide insight into the reasoning behind the sudden spike. 
+
+The following graph analyzes the distribution of various subtypes under the "Crime Against Property" category, such as "Auto Theft" and "Break & Enter". The variables used are "total_count" for x-axis and "subtype" for y-axis. 
 
 ```{r}
 #| label: figure2
