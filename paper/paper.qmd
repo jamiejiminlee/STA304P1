@@ -26,7 +26,7 @@ library(readr)
 
 # Introduction
 
-Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' views on safety and security, influencing both the social and economic stability of their communities. (@unodc)
+Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' views on safety and security, influencing both the social and economic stability of their communities (@unodc).
 
 In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper performs a trend analysis on property crime trends from 2014 to 2023, focusing on the sharp rise in 2023. The study begins by examining annual crime rates across the 10-year range, followed by an analysis of the distribution of property crime categories in 2023 to explore the factors behind the sudden spike. This paper provides insights into geographic and crime-type patterns influencing the increase in property-related offences. 
 
