@@ -104,8 +104,8 @@ From Figure 2 in the Data section, it is clearly shown that thefts under $5000 c
 #| warning: false
 #| error: false
 #| message: false
-#| label: figure 3 a) and b)
-#| fig-cap: "Figures 3a) and b) display summary tables of the data in Figure 1 and Figure 2. Each table displays the number of reported crimes based on reported year and type of property crime."
+#| label: figure 3a)
+#| fig-cap: "Table 1 provides a summary table for the data in Figure 1 and displays the number of reported crimes based on reported year."
 #| echo: false
 
 cleaned_data <- read_csv("/Users/jamielee/Toronto-Reported-Crimes/data/analysis_data/analysis_data.csv")
@@ -116,6 +116,17 @@ yearly_propertycrime <- cleaned_data %>%
 
 yearly_propertycrime %>%
   kable(caption = "Total Reported Property Crimes Per Year")
+``` 
+```{r}
+#| include: true
+#| warning: false
+#| error: false
+#| message: false
+#| label: figure 3b)
+#| fig-cap: "Table 2 provides a summary table for the data in Figure 2 and displays the number of property crimes based on different types of property crime in 2023."
+#| echo: false
+
+cleaned_data <- read_csv("/Users/jamielee/Toronto-Reported-Crimes/data/analysis_data/analysis_data.csv")
 
 propertycrime_type2023 <- cleaned_data %>%
   dplyr::filter(report_year == 2023) %>%
@@ -125,7 +136,7 @@ propertycrime_type2023 <- cleaned_data %>%
 
 propertycrime_type2023 %>%
   kable(caption = "Types of Property Crime Reported in 2023")
-``` 
+```
 
 The summary tables in Figures 3a) and 3b) display that 55388 cases out of 101478 reported crimes was "Theft Under $5000" - a notable 55.58% rate. This may also be due to the fact that 2023 was the year when more public places reopened and peopled went back to their normal lives, this may have provided increased opportunities for minor thefts. (@BrennanCenter)
 
