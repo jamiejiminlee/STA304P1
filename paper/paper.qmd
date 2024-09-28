@@ -26,47 +26,44 @@ library(readr)
 
 # Introduction
 
-In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper explores and compares the rates of property crime across different
-geographic divisions of the City of Toronto. 
-
+Property crimes, which includes offenses such as theft, burglary, and vehicle-related crimes, significantly impact residents' perceptions on safety and security, influencing both the social and economic well-being of communities. 
+In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a total of 189,977 recorded incidents, breaking the highest recorded value of property crimes in the city (@Statista2023). This paper performs a trend analysis on property crime trends from 2014 to 2023, focusing on the sharp rise in 2023. The study begins by examining annual crime rates across the 10-year range, followed by an analysis of the distribution of property crime categories in 2023 to explore the factors behind the sudden spike. This paper provides insights into geographic and crime-type patterns influencing the increase in property-related offences. 
 
 # Data {#sec-data}
 
-The dataset used for this paper is "Police Annual Statistical Report" (@propertycrime_data), accessed through the Open Data Toronto portal (@opendatatoronto). The dataset was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). Despite the existence of other datasets in OpenDataToronto such as "Police Annual Statistical Report - Victims of Crimes", it wasn't chosen for this analysis as the paper focuses solely on property crimes. 
-```{r}
-#### Clean data ####
-raw_data <- read.csv("../data/raw_data/raw_data.csv")
+The dataset used in this paper is the "Police Annual Statistical Report - Reported Crimes" (@propertycrime_data), provided by the Toronto Police Services and accessed through OpenDataToronto (@opendatatoronto). It includes data from 2014 to 2023, aggregated by year, crime category, subtype, total count, resolved count, and police division - offering a comprehensive view of reported crime trends over this period. 
 
-cleaned_data <-
-  raw_data |>
-  janitor::clean_names() |>
-  filter(category == "Crimes Against Property") |>
-  select(report_year, division, category, subtype, count) |>
-  mutate(
-    count_ = as.numeric(count)) |>
-  tidyr::drop_na()
-head(cleaned_data)
-```
-
+This dataset was chosen for its structured format, which allows for easy data cleaning and filtering to isolate "Crimes Against Property" under the crime category. The data was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). While other datasets such as "Police Annual Statistical Report - Victims of Crimes"(@victimsofcrimes_data) were available on OpenDataToronto (@opendatatoronto), it was not selected for this analysis since the paper focuses exclusively on property crimes. 
 
 ```{r}
+#| include: false
+#| warning: false
+#| message: false
+
 yearly_propertycrime <- cleaned_data %>%
   group_by(report_year) %>%
   summarize(total_count = sum(count_))
 
 yearly_propertycrime
+
+propertycrime_type2023 <- cleaned_data %>%
+  dplyr::filter(report_year == 2023) %>%
+  group_by(subtype) %>%
+  summarize(total_count = sum(count_)) %>%
+  arrange(desc(total_count))
 ``` 
 
+The following graph displays the trend in the number of property crimes from 2014 to 2023, revealing a sudden spike in 2023, with the reported number of property crimes exceeding 100,000.
 
 ```{r}
-#| label: codechunk1
-#| fig-cap: "Figure1: Graph compares the number of property crimes from 2013 to 2024, in 1-year increments. Figure displays a sudden spike in property crimes in 2023 - we will be analyzing the data from 2023 to compare different types of property crimes that occured"
+#| label: figure1
+#| fig-cap: "Graph compares the number of property crimes from 2013 to 2024, in 1-year increments. Figure displays a sudden spike in property crimes in 2023 - we will be analyzing the data from 2023 to compare different types of property crimes that occured"
 #| echo: false
 
 yearly_propertycrime %>%
-  dplyr::filter(report_year >= 2013 & report_year <= 2024) |>
+  dplyr::filter(report_year >= 2014 & report_year <= 2023) |>
   ggplot(mapping = aes(x = report_year, y = total_count)) +
-  geom_bar(stat = "identity", fill = "purple") +
+  geom_bar(stat = "identity", fill = "pink") +
   scale_x_continuous(breaks = seq(2013, 2024, by = 1)) +
   labs(
     x = "Year",
@@ -75,27 +72,23 @@ yearly_propertycrime %>%
   theme_minimal()
 ```
 
-TestMessage
-TestMessage2
+Due to the evident spike of property crimes in 2023 from Figure 1, we now investigate the types of property crimes that occured in 2023, to determine if the breakdown of different offence categories would provide insight into the reasoning behind the sudden spike. By analyzing the distribution of various subtypes under the "Crime Against Property" category, such as "Auto Theft" and "Break & Enter". 
 
+```{r}
+#| label: figure2
+#| fig-cap: "Graph compares the the types of property crimes reported in 2023."
+#| echo: false
 
-# Model
-
-The goal of our modelling strategy is twofold. Firstly,...
-
-Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix ].
-
-## Model set-up
-
-
-
-
-### Model justification
-
-We expect a positive relationship between the size of the wings and time spent aloft. In particular...
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
+propertycrime_type2023 %>%
+  ggplot(mapping = aes(x = total_count, y = forcats::fct_reorder(subtype, total_count))) +
+  geom_bar(stat = "identity", fill = "orange") +
+  labs(
+    y = "Types of Property Crimes",
+    x = "Number of Reported Crimes"
+  ) +
+  theme_minimal()
+```
+From Figure 2, it is clearly shown that thefts under $5000 covers the majority of the reported property crimes in Toronto in 2023. Such trend may be drive from the ongoing recovery period from economic challenges caused by the COVID-19 pandemic. As individuals and businesses struggled to adjust to the post-pandemic economy, economic pressures could have contributed to a rise in smaller thefts. (@unodc) Additionally, as more public places reopened and peopled went back to their normal lives, this may have provided increased opportunities  for minor thefts. (@BrennanCenter)
 
 # Results
 
