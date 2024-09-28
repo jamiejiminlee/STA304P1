@@ -94,23 +94,38 @@ propertycrime_type2023 %>%
   ) +
   theme_minimal()
 ```
-From Figure 2, it is clearly shown that thefts under $5000 covers the majority of the reported property crimes in Toronto in 2023. Such trend may be drive from the ongoing recovery period from economic challenges caused by the COVID-19 pandemic. As individuals and businesses struggled to adjust to the post-pandemic economy, economic pressures could have contributed to a rise in smaller thefts. (@unodc) Additionally, as more public places reopened and peopled went back to their normal lives, this may have provided increased opportunities  for minor thefts. (@BrennanCenter)
 
 # Results
 
-Our results are summarized in .
+From Figure 2 in the Data section, it is clearly shown that thefts under $5000 covers the majority of the reported property crimes in Toronto in 2023. Such trend may be drive from the ongoing recovery period from economic challenges caused by the COVID-19 pandemic. As individuals and businesses struggled to adjust to the post-pandemic economy, economic pressures could have contributed to a rise in smaller thefts. (@unodc) Below are the summary table for the two graphs produced above - each table displaying the number of reported crimes based on "Report Year" and "Type of Property Crime"
 
 ```{r}
-#| echo: false
-#| eval: true
+#| include: true
 #| warning: false
+#| error: false
 #| message: false
+#| label: figure 3 a) and b)
+#| fig-cap: "Figures 3a) and b) display summary tables of the data in Figure 1 and Figure 2. Each table displays the number of reported crimes based on reported year and type of property crime."
+#| echo: false
 
-```
+cleaned_data <- read_csv("/Users/jamielee/Toronto-Reported-Crimes/data/analysis_data/analysis_data.csv")
 
+yearly_propertycrime <- cleaned_data %>%
+  group_by(report_year) %>%
+  summarize(total_count = sum(count_))
 
+yearly_propertycrime
 
+propertycrime_type2023 <- cleaned_data %>%
+  dplyr::filter(report_year == 2023) %>%
+  group_by(subtype) %>%
+  summarize(total_count = sum(count_)) %>%
+  arrange(desc(total_count))
 
+propertycrime_type2023
+``` 
+
+The summary tables in Figures 3a) and 3b) display that 55388 cases out of 101478 reported crimes was "Theft Under $5000" - a notable 55.58% rate. This may also be due to the fact that 2023 was the year when more public places reopened and peopled went back to their normal lives, this may have provided increased opportunities for minor thefts. (@BrennanCenter)
 
 
 # Discussion
