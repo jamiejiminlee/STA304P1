@@ -99,7 +99,9 @@ propertycrime_type2023 %>%
 
 # Results
 
-From Figure 2 in the Data section, it is clearly shown that thefts under $5000 covers the majority of the reported property crimes in Toronto in 2023. Such trend may be drive from the ongoing recovery period from economic challenges caused by the COVID-19 pandemic. As individuals and businesses struggled to adjust to the post-pandemic economy, economic pressures could have contributed to a rise in smaller thefts. (@unodc) Below are the summary table for the two graphs produced above - each table displaying the number of reported crimes based on "Report Year" and "Type of Property Crime"
+From Figure 2 in the Data section, it is clearly shown that thefts under $5000 covers the majority of the reported property crimes in Toronto in 2023. Such trend may be drive from the ongoing recovery period from economic challenges caused by the COVID-19 pandemic. As individuals and businesses struggled to adjust to the post-pandemic economy, economic pressures could have contributed to a rise in smaller thefts. (@unodc) 
+
+Below are the summary table for the two graphs produced above - each table displaying the number of reported crimes based on "Report Year" and "Type of Property Crime"
 
 ```{r}
 #| include: true
