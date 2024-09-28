@@ -5,7 +5,7 @@ author:
 thanks: "Code and data are available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git"
 date: 27 September 2024
 date-format: long
-abstract: "This paper aims to explore Toronto's property crime rates and types of property crimes from 2014 to 2023.  The analysis reveals a spike in property crimes in 2023, with shifts towards crime types such as break-and-enter and auto thefts."
+abstract: "This paper aims to explore Toronto's property crime rates and types of property crimes from 2014 to 2023.  The analysis reveals a spike in property crimes in 2023, with shifts towards crime types such as break-and-enter and auto thefts. This analysis is important in understanding  property crime patterns over the past decade, particularly the contributing factors behind the sudden spike in 2023. Such insight can guide policymakers and the government in developing impactful prevention strategies."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -32,9 +32,9 @@ In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a tota
 
 # Data {#sec-data}
 
-The dataset used in this paper is the "Police Annual Statistical Report - Reported Crimes" (@propertycrime_data), provided by the Toronto Police Services and accessed through OpenDataToronto (@opendatatoronto). It includes data from 2014 to 2023, aggregated by year, crime category, subtype, total count, resolved count, and police division - offering a comprehensive view of reported crime trends over this period. 
+The dataset used in this paper is the "Police Annual Statistical Report - Reported Crimes" (@propertycrime_data), provided by the Toronto Police Services and accessed through OpenDataToronto (@opendatatoronto). It includes data from 2014 to 2023, with variables such as year, crime category, subtype, total count, resolved count, and police division - offering a comprehensive view of reported crime trends over this period. 
 
-This dataset was chosen for its structured format, which allows for easy data cleaning and filtering to isolate "Crimes Against Property" under the crime category. The data was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). While other datasets such as "Police Annual Statistical Report - Victims of Crimes"(@victimsofcrimes_data) were available on OpenDataToronto (@opendatatoronto), it was not selected for this analysis since the paper focuses exclusively on property crimes. Code and data supporting the following analysis is available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git.
+This dataset was chosen for its structured format, which allows for easy data cleaning and filtering to isolate "Crimes Against Property" under the crime category. The data was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). While other datasets such as "Police Annual Statistical Report - Victims of Crimes"(@victimsofcrimes_data) were available on OpenDataToronto (@opendatatoronto), it was not selected for this analysis since the paper focuses exclusively on property crimes. Code and data supporting the following analysis are available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git.
 
 ```{r}
 #| include: false
