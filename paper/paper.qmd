@@ -114,7 +114,8 @@ yearly_propertycrime <- cleaned_data %>%
   group_by(report_year) %>%
   summarize(total_count = sum(count_))
 
-yearly_propertycrime
+yearly_propertycrime %>%
+  kable(caption = "Total Reported Property Crimes Per Year")
 
 propertycrime_type2023 <- cleaned_data %>%
   dplyr::filter(report_year == 2023) %>%
@@ -122,7 +123,8 @@ propertycrime_type2023 <- cleaned_data %>%
   summarize(total_count = sum(count_)) %>%
   arrange(desc(total_count))
 
-propertycrime_type2023
+propertycrime_type2023 %>%
+  kable(caption = "Types of Property Crime Reported in 2023")
 ``` 
 
 The summary tables in Figures 3a) and 3b) display that 55388 cases out of 101478 reported crimes was "Theft Under $5000" - a notable 55.58% rate. This may also be due to the fact that 2023 was the year when more public places reopened and peopled went back to their normal lives, this may have provided increased opportunities for minor thefts. (@BrennanCenter)
