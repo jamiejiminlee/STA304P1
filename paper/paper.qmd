@@ -34,7 +34,7 @@ In 2023, Toronto's property crime rate rose by 22.28% from 2022, reaching a tota
 
 The data used in this paper is the "Police Annual Statistical Report - Reported Crimes" (@propertycrime_data), provided by the Toronto Police Services and accessed through OpenDataToronto (@opendatatoronto). It includes data from 2014 to 2023, with variables such as year, crime category, subtype, total count, resolved count, and police division - offering a comprehensive view of reported crime trends over this period. 
 
-This data was chosen for its structured format, which allows for easy data cleaning and filtering to isolate "Crimes Against Property" under the crime category. The data was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). While other datasets such as "Police Annual Statistical Report - Victims of Crimes"(@victimsofcrimes_data) were available on OpenDataToronto (@opendatatoronto), it was not selected for this analysis since the paper focuses exclusively on property crimes. Code and data supporting the following analysis are available at: https://github.com/jamiejiminlee/Toronto-Reported-Crimes.git.
+This data was chosen for its structured format, which allows for easy data cleaning and filtering to isolate "Crimes Against Property" under the crime category. The data was simulated, downloaded, cleaned, and analyzed using the R programming language (@citeR). Although other datasets such as "Police Annual Statistical Report - Victims of Crimes"(@victimsofcrimes_data) were available on OpenDataToronto (@opendatatoronto), it was not selected for this analysis since the paper focuses exclusively on property crimes. 
 
 ```{r}
 #| include: false
